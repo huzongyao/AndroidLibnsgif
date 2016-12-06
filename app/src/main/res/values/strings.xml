@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndLibNsgif</string>
+    <string name="customer_view">CustomerView</string>
+    <string name="gif_with_photoview">GifWithPhotoView</string>
+</resources>
