@@ -16,6 +16,11 @@ android {
         }
     }
     buildTypes {
+        debug {
+            ndk {
+                cFlags '-DNDK_DEBUG'
+            }
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

@@ -9,18 +9,16 @@
  */
 
 #include <jni.h>
-#include <android/log.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <android/bitmap.h>
 #include "libnsgif.h"
 
+#ifdef NDK_DEBUG
+#include <android/log.h>
 #define LOG_TAG "jniLog"
-#undef LOG
-#define DEBUG
 
-#ifdef DEBUG
 #define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define LOGW(...) __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
