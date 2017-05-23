@@ -135,7 +135,7 @@ public class GifDecoder {
      *
      * @param buffer
      * @param params
-     * @return
+     * @return error code ,0 if no error
      */
     private native int nInitByBytes(byte[] buffer, int[] params);
 
@@ -151,7 +151,7 @@ public class GifDecoder {
     /**
      * destory the native resources
      *
-     * @return
+     * @return error code ,0 if no error
      */
     private native int nDestory(int handler);
 

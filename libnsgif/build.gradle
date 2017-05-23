@@ -12,7 +12,7 @@ android {
         ndk {
             moduleName "nsgif"
             ldLibs "log", "jnigraphics"
-            abiFilters "armeabi", "armeabi-v7a"
+            //abiFilters "armeabi", "armeabi-v7a"
         }
     }
     buildTypes {
@@ -25,6 +25,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
