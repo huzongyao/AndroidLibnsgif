@@ -7,30 +7,8 @@
  Description : these code is called by java and used to decode gif file
  ============================================================================
  */
-
-#include <jni.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <android/bitmap.h>
 #include "libnsgif.h"
-
-#ifdef NDK_DEBUG
-#include <android/log.h>
-#define LOG_TAG "jniLog"
-
-#define LOGD(...) __android_log_print(ANDROID_LOG_DEBUG,LOG_TAG,__VA_ARGS__)
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
-#define LOGW(...) __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
-#define LOGF(...) __android_log_print(ANDROID_LOG_FATAL,LOG_TAG,__VA_ARGS__)
-#else
-#define LOGD(...) do{}while(0)
-#define LOGI(...) do{}while(0)
-#define LOGW(...) do{}while(0)
-#define LOGE(...) do{}while(0)
-#define LOGF(...) do{}while(0)
-#endif
+#include "jnihelper.h"
 
 #define FUNC(f) Java_com_hzy_libnsgif_GifDecoder_##f
 
@@ -143,7 +121,7 @@ unsigned char *loadFile(const char *path, size_t *pFileLength) {
 /**
  * init the decoder and scan get the gif information
  */
-int initDecoder(const char *filePath, unsigned char *buffer, size_t bufferLength, int *params) {
+int initDecoder(const char *filePath, unsigned char *buffer, size_t bufferLength, jlong *params) {
     gif_result code;
     //malloc gif space
     gif_animation *gif = (gif_animation *) malloc(sizeof(gif_animation));
@@ -173,37 +151,37 @@ int initDecoder(const char *filePath, unsigned char *buffer, size_t bufferLength
     params[0] = gif->frame_count;
     params[1] = gif->width;
     params[2] = gif->height;
-    params[3] = (int) gif;
+    params[3] = (jlong) gif;
     return 0;
 }
 
 
-JNIEXPORT jint JNICALL FUNC(nInitByPath)(JNIEnv *env, jobject thiz, jstring filePath,
-                                         jintArray params) {
+JNIEXPORT jint JNICALL FUNC(nInitByPath)(JNIEnv *env, jclass thiz, jstring filePath,
+                                         jlongArray params) {
     int ret = 0;
     char *cfilePath = (char *) (*env)->GetStringUTFChars(env, filePath, NULL);
-    int *cParams = (*env)->GetIntArrayElements(env, params, NULL);
+    jlong *cParams = (*env)->GetLongArrayElements(env, params, NULL);
     ret = initDecoder(cfilePath, NULL, 0, cParams);
-    (*env)->ReleaseIntArrayElements(env, params, cParams, 0);
+    (*env)->ReleaseLongArrayElements(env, params, cParams, 0);
     (*env)->ReleaseStringUTFChars(env, filePath, cfilePath);
     return ret;
 }
 
-JNIEXPORT jint JNICALL FUNC(nInitByBytes)(JNIEnv *env, jobject thiz, jbyteArray buffer,
-                                          jintArray params) {
+JNIEXPORT jint JNICALL FUNC(nInitByBytes)(JNIEnv *env, jclass thiz, jbyteArray buffer,
+                                          jlongArray params) {
     int ret = 0;
     size_t bufferLength = (size_t) ((*env)->GetArrayLength(env, buffer));
-    int *cParams = (*env)->GetIntArrayElements(env, params, NULL);
+    jlong *cParams = (*env)->GetLongArrayElements(env, params, NULL);
     unsigned char *cBuffer = (unsigned char *) (*env)->GetByteArrayElements(env, buffer, NULL);
     unsigned char *cBufferCopy = (unsigned char *) malloc(bufferLength);
     memcpy(cBufferCopy, cBuffer, bufferLength);
     ret = initDecoder(NULL, cBufferCopy, bufferLength, cParams);
-    (*env)->ReleaseIntArrayElements(env, params, cParams, 0);
+    (*env)->ReleaseLongArrayElements(env, params, cParams, 0);
     return ret;
 }
 
-JNIEXPORT jint JNICALL FUNC(nGetFrameBitmap)(JNIEnv *env, jobject thiz, jint index, jobject jbitmap,
-                                             jint handler) {
+JNIEXPORT jint JNICALL FUNC(nGetFrameBitmap)(JNIEnv *env, jclass thiz, jint index, jobject jbitmap,
+                                             jlong handler) {
     int ret = 0;
     int delay = 0;
     void *bmpAddr = NULL;
@@ -226,7 +204,7 @@ JNIEXPORT jint JNICALL FUNC(nGetFrameBitmap)(JNIEnv *env, jobject thiz, jint ind
     return delay * 10;
 }
 
-JNIEXPORT jint JNICALL FUNC(nDestory)(JNIEnv *env, jobject thiz, jint handler) {
+JNIEXPORT jint JNICALL FUNC(nDestory)(JNIEnv *env, jclass thiz, jlong handler) {
     gif_animation *gif = (gif_animation *) handler;
     if (gif == NULL) {
         LOGE("gif is null");
