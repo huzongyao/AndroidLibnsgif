@@ -170,12 +170,11 @@ JNIEXPORT jint JNICALL FUNC(nInitByPath)(JNIEnv *env, jclass thiz, jstring fileP
 JNIEXPORT jint JNICALL FUNC(nInitByBytes)(JNIEnv *env, jclass thiz, jbyteArray buffer,
                                           jlongArray params) {
     int ret = 0;
-    size_t bufferLength = (size_t) ((*env)->GetArrayLength(env, buffer));
+    jsize bufferLength = ((*env)->GetArrayLength(env, buffer));
     jlong *cParams = (*env)->GetLongArrayElements(env, params, NULL);
-    unsigned char *cBuffer = (unsigned char *) (*env)->GetByteArrayElements(env, buffer, NULL);
-    unsigned char *cBufferCopy = (unsigned char *) malloc(bufferLength);
-    memcpy(cBufferCopy, cBuffer, bufferLength);
-    ret = initDecoder(NULL, cBufferCopy, bufferLength, cParams);
+    jbyte *cBuffer = malloc((size_t) bufferLength);
+    (*env)->GetByteArrayRegion(env, buffer, 0, bufferLength, cBuffer);
+    ret = initDecoder(NULL, (unsigned char*)cBuffer, (size_t) bufferLength, cParams);
     (*env)->ReleaseLongArrayElements(env, params, cParams, 0);
     return ret;
 }
