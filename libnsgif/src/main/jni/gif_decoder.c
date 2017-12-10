@@ -2,7 +2,7 @@
  ============================================================================
  Name        : gif_decoder.c
  Author      : huzongyao
- Version     :
+ Version     : 1.3
  Copyright   : https://github.com/huzongyao
  Description : these code is called by java and used to decode gif file
  ============================================================================
@@ -39,24 +39,6 @@ void bitmap_modified(void *bitmap) {
 gif_bitmap_callback_vt bitmap_callbacks = {bitmap_create, bitmap_destroy, bitmap_get_buffer,
                                            bitmap_set_opaque, bitmap_test_opaque, bitmap_modified};
 
-int getFrame(gif_animation *gif, int index) {
-    gif_result code;
-    if (gif == NULL) {
-        LOGE("gif is null");
-        return -1;
-    }
-    if (index < 0 || index >= gif->frame_count) {
-        LOGE("mCurIndex error");
-        return -1;
-    }
-    code = gif_decode_frame(gif, index);
-    if (code != GIF_OK) {
-        showError("gif_decode_frame", code);
-        return -1;
-    }
-    return gif->frames[index].frame_delay;
-}
-
 void showError(const char *context, gif_result code) {
     switch (code) {
         case GIF_INSUFFICIENT_FRAME_DATA:
@@ -78,6 +60,24 @@ void showError(const char *context, gif_result code) {
             LOGE("%s failed: unknown code %i", context, code);
             break;
     }
+}
+
+int getFrame(gif_animation *gif, int index) {
+    gif_result code;
+    if (gif == NULL) {
+        LOGE("gif is null");
+        return -1;
+    }
+    if (index < 0 || index >= gif->frame_count) {
+        LOGE("mCurIndex error");
+        return -1;
+    }
+    code = gif_decode_frame(gif, index);
+    if (code != GIF_OK) {
+        showError("gif_decode_frame", code);
+        return -1;
+    }
+    return gif->frames[index].frame_delay;
 }
 
 /**

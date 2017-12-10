@@ -4,13 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:padding="@dimen/activity_horizontal_margin"
     tools:context="com.hzy.gifshow.MainActivity">
-
-    <Button
-        android:id="@+id/button_another_demo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/customer_view" />
 
     <com.hzy.libnsgif.NsGifView
         android:id="@+id/demo_gif_view1"
@@ -19,6 +14,13 @@
 
     <com.hzy.libnsgif.NsGifView
         android:id="@+id/demo_gif_view2"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.hzy.libnsgif.NsGifView
+        android:id="@+id/demo_gif_view3"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

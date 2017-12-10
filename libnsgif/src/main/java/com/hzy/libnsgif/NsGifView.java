@@ -16,6 +16,7 @@ public class NsGifView extends ImageView implements IGifView {
 
     private static final int MAX_ASSETS_LENGTH = 0x10000000;
     private NsGifPlayer mGifPlayer;
+    private String mAssetName;
 
     public NsGifView(Context context) {
         this(context, null);
@@ -38,9 +39,10 @@ public class NsGifView extends ImageView implements IGifView {
         mGifPlayer.setFilePath(filePath);
     }
 
-    public void loadAssets(String assetsPath) {
+    public void loadAssets(String assetsName) {
         try {
-            InputStream is = getContext().getAssets().open(assetsPath);
+            mAssetName = assetsName;
+            InputStream is = getContext().getAssets().open(assetsName);
             if (is.available() <= MAX_ASSETS_LENGTH) {
                 byte[] buffer = new byte[is.available()];
                 is.read(buffer);
@@ -78,5 +80,9 @@ public class NsGifView extends ImageView implements IGifView {
     @Override
     public void onRender() {
         postInvalidate();
+    }
+
+    public String getAssetName() {
+        return mAssetName;
     }
 }
