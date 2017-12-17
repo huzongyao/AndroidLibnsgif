@@ -11,7 +11,7 @@ This is a simple android gif decoder and player based on libnsgif.
 #### Begin To Use
 ```gradle
 dependencies {
-    compile 'com.hzy:nsgif:1.0.0'
+    compile 'com.hzy:nsgif:1.2.0'
 }
 ```
 
