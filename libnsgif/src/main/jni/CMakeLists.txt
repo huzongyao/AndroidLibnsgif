@@ -5,17 +5,15 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99 -Wall")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds it for you.
 # Gradle automatically packages shared libraries with your APK.
-set(nsgif_SRCS  gif_decoder.c
-                libnsgif.c
-                lzw.c )
+file(GLOB_RECURSE NATIVE_SRCS "*.c")
 
-add_library(nsgif SHARED ${nsgif_SRCS})
+add_library(nsgif SHARED ${NATIVE_SRCS})
 
 # Specifies libraries CMake should link to your target library. You
 # can link multiple libraries, such as libraries you define in the
