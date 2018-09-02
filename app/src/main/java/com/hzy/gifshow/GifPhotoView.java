@@ -4,13 +4,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 
+import com.github.chrisbanes.photoview.PhotoView;
 import com.hzy.libnsgif.IGifView;
 import com.hzy.libnsgif.NsGifPlayer;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import uk.co.senab.photoview.PhotoView;
 
 /**
  * Created by huzongyao on 16-12-6.
