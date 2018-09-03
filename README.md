@@ -7,6 +7,7 @@ This is a simple android gif decoder and player based on libnsgif.
 * The main code and logic is from libnsgif: http://www.netsurf-browser.org/projects/libnsgif/
 * I have put the global static fields into structures to avoid instances share same resource
 * there are more powerful image libraries could support gif animations such as fresco
+* Libnsgif is licensed under the [MIT Licence](http://opensource.org/licenses/mit-license.php).
 
 #### Begin To Use
 ```gradle
