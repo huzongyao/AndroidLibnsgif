@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "libnsgif.h"
+//#include "utils/log.h"
 
 #include "lzw.h"
 
