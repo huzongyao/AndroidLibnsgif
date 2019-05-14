@@ -1,8 +1,12 @@
-# AndLibNsgif(安卓Gif动画解析播放)
+# AndroidLibnsgif(安卓Gif动画解析播放)
 This is a simple android gif decoder and player based on libnsgif.
+
+[![Travis](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)](https://github.com/huzongyao/AndroidLibnsgif)
+[![Travis](https://img.shields.io/badge/libnsgif-v0.2.1-brightgreen.svg)](http://www.netsurf-browser.org/projects/libnsgif/)
 
 #### Detail
 * This project is for demonstrate how to plug in jni with gradle and android studio
+* Compiled with ndk and cmake.
 * Also you may improve it to use for production
 * The main code and logic is from libnsgif: http://www.netsurf-browser.org/projects/libnsgif/
 * I have put the global static fields into structures to avoid instances share same resource

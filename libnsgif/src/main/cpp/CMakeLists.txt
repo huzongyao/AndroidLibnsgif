@@ -11,6 +11,8 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall")
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds it for you.
 # Gradle automatically packages shared libraries with your APK.
+include_directories(nsgif/)
+
 file(GLOB_RECURSE NATIVE_SRCS "*.c")
 
 add_library(nsgif SHARED ${NATIVE_SRCS})

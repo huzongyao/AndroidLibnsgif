@@ -7,6 +7,7 @@
  Description : these code is called by java and used to decode gif file
  ============================================================================
  */
+#include <string.h>
 #include "libnsgif.h"
 #include "jnihelper.h"
 
