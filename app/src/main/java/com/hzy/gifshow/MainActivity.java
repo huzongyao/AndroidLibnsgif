@@ -2,8 +2,9 @@ package com.hzy.gifshow;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.hzy.libnsgif.NsGifView;
 
@@ -17,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mGifView1 = (NsGifView) findViewById(R.id.demo_gif_view1);
-        mGifView2 = (NsGifView) findViewById(R.id.demo_gif_view2);
-        mGifView3 = (NsGifView) findViewById(R.id.demo_gif_view3);
+        mGifView1 = findViewById(R.id.demo_gif_view1);
+        mGifView2 = findViewById(R.id.demo_gif_view2);
+        mGifView3 = findViewById(R.id.demo_gif_view3);
         mGifView1.loadAssets("test1.gif");
         mGifView2.loadAssets("test2.gif");
         mGifView3.loadAssets("test3.gif");

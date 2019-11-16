@@ -1,10 +1,11 @@
 package com.hzy.gifshow;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PhotoViewActivity extends AppCompatActivity {
 
@@ -15,7 +16,7 @@ public class PhotoViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_view);
-        mGifView = (GifPhotoView) findViewById(R.id.demo_view_photo);
+        mGifView = findViewById(R.id.demo_view_photo);
         mPhotoName = getIntent().getStringExtra("asset_name");
         if(!TextUtils.isEmpty(mPhotoName)) {
             mGifView.loadAssets(mPhotoName);

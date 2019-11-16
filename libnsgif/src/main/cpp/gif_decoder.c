@@ -91,7 +91,7 @@ unsigned char *loadFile(const char *path, size_t *pFileLength) {
     unsigned char *data = NULL;
     size_t n;
 
-    fd = fopen(path, "rb");
+    fd = fopen(path, "rbe");
     if (!fd) {
         LOGE("File open error[%s]", path);
         return NULL;
@@ -158,8 +158,8 @@ int initDecoder(const char *filePath, unsigned char *buffer, size_t bufferLength
 }
 
 
-JNIEXPORT jint JNICALL FUNC(nInitByPath)(JNIEnv *env, jclass thiz, jstring filePath,
-                                         jlongArray params) {
+JNIEXPORT jint JNICALL
+FUNC(nInitByPath)(JNIEnv *env, jclass thiz, jstring filePath, jlongArray params) {
     int ret = 0;
     char *cfilePath = (char *) (*env)->GetStringUTFChars(env, filePath, NULL);
     jlong *cParams = (*env)->GetLongArrayElements(env, params, NULL);
@@ -169,8 +169,8 @@ JNIEXPORT jint JNICALL FUNC(nInitByPath)(JNIEnv *env, jclass thiz, jstring fileP
     return ret;
 }
 
-JNIEXPORT jint JNICALL FUNC(nInitByBytes)(JNIEnv *env, jclass thiz, jbyteArray buffer,
-                                          jlongArray params) {
+JNIEXPORT jint JNICALL
+FUNC(nInitByBytes)(JNIEnv *env, jclass thiz, jbyteArray buffer, jlongArray params) {
     int ret = 0;
     jsize bufferLength = ((*env)->GetArrayLength(env, buffer));
     jlong *cParams = (*env)->GetLongArrayElements(env, params, NULL);
@@ -181,8 +181,8 @@ JNIEXPORT jint JNICALL FUNC(nInitByBytes)(JNIEnv *env, jclass thiz, jbyteArray b
     return ret;
 }
 
-JNIEXPORT jint JNICALL FUNC(nGetFrameBitmap)(JNIEnv *env, jclass thiz, jint index, jobject jbitmap,
-                                             jlong handler) {
+JNIEXPORT jint JNICALL
+FUNC(nGetFrameBitmap)(JNIEnv *env, jclass thiz, jint index, jobject jbitmap, jlong handler) {
     int ret = 0;
     int delay = 0;
     void *bmpAddr = NULL;
@@ -205,7 +205,8 @@ JNIEXPORT jint JNICALL FUNC(nGetFrameBitmap)(JNIEnv *env, jclass thiz, jint inde
     return delay * 10;
 }
 
-JNIEXPORT jint JNICALL FUNC(nDestory)(JNIEnv *env, jclass thiz, jlong handler) {
+JNIEXPORT jint JNICALL
+FUNC(nDestory)(JNIEnv *env, jclass thiz, jlong handler) {
     gif_animation *gif = (gif_animation *) handler;
     if (gif == NULL) {
         LOGE("gif is null");
