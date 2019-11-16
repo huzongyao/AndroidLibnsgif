@@ -4,6 +4,9 @@ This is a simple android gif decoder and player based on libnsgif.
 [![Travis](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)](https://github.com/huzongyao/AndroidLibnsgif)
 [![Travis](https://img.shields.io/badge/libnsgif-v0.2.1-brightgreen.svg)](http://www.netsurf-browser.org/projects/libnsgif/)
 
+#### Screenshot
+![screenshot](https://github.com/huzongyao/AndLibNsgif/blob/master/misc/screen.gif?raw=true)
+
 #### Detail
 * This project is for demonstrate how to plug in jni with gradle and android studio
 * Compiled with ndk and cmake.
